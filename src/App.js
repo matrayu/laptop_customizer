@@ -62,6 +62,7 @@ class CustomizationForm extends Component {
         const featureClass = 'feature__option ' + selectedClass;
         return (
           <li className='feature__item' key={optIndex}>
+            {/* Ask TJ about this */}
             <div className={featureClass} onClick={e => this.updateFeature(itm, opt)}>
               {opt.name}
               ({ new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD'})
@@ -93,6 +94,31 @@ class CustomizationForm extends Component {
 
 class Summary extends Component {
   render() {
+    
+
+    const total = Object.keys(this.props.selected)
+      .reduce((acc, curr) => acc + this.props.selected[curr].cost, 0
+    )
+
+
+
+    return (
+      <section className="main__summary">
+        <h3>NEW GREENLEAF 2018</h3>
+          <SummaryList selected={this.props.selected}/>
+        <div className="summary__total">
+          <div className="summary__total__label">Your Price: </div>
+          <div className="summary__total__value">
+            { new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(total) }
+          </div>
+        </div>
+      </section>
+    );
+  }
+}
+
+class SummaryList extends Component {
+  render() {
     const summary = Object.keys(this.props.selected).map(key => (
       <div className="summary__option" key={key}>
         <div className="summary__option__label">
@@ -107,26 +133,12 @@ class Summary extends Component {
         </div>
       </div>
     ))
-
-    const total = Object.keys(this.props.selected)
-      .reduce((acc, curr) => acc + this.props.selected[curr].cost, 0
-    )
-
     return (
-      <section className="main__summary">
-        <h3>NEW GREENLEAF 2018</h3>
-          { summary }
-        <div className="summary__total">
-          <div className="summary__total__label">Your Price: </div>
-          <div className="summary__total__value">
-            { total }
-          </div>
-        </div>
-      </section>
-    );
+      <div>
+        {summary}
+      </div>
+    )
   }
 }
-
-
 
 export default App;  
