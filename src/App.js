@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Summary from './Summary';
-import CustomizationForm from './CustomizationForm';
+import Summary from './Summary/Summary';
+import CustomizationForm from './CustomizationForm/CustomizationForm';
 import './App.css';
 
 class App extends Component {
